@@ -100,7 +100,7 @@
 
 
 
-    var msghub = new MsgHub();
+    var msghub = new MsgHub('https://pubsub.msghub.io');
     msghub.subscribe('success', recv_success);
     msghub.subscribe('info', recv_info);
     msghub.subscribe('warning', recv_warning);
