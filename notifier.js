@@ -1,3 +1,63 @@
+function recv_success(channel, data) {
+    if (typeof data.title == 'undefined') {
+        Notifier.success(data.msg);
+    } else {
+        Notifier.success(data.msg, data.title);
+    }
+}
+
+function send_success(msg, title) {
+    msghub.publish('success', {'msg': msg}, false);
+}
+
+function recv_info(channel, data) {
+    if (typeof data.title == 'undefined') {
+        Notifier.info(data.msg);
+    } else {
+        Notifier.info(data.msg, data.title);
+    }
+}
+
+function send_info(msg, title) {
+    msghub.publish('info', {'msg': msg, 'title': title}, false);
+}
+
+function recv_warning(channel, data) {
+    if (typeof data.title == 'undefined') {
+        Notifier.warning(data.msg);
+    } else {
+        Notifier.warning(data.msg, data.title);
+    }
+}
+
+function send_warning(msg, title) {
+    msghub.publish('warning', {'msg': msg, 'title': title}, false);
+}
+
+function recv_error(channel, data) {
+    if (typeof data.title == 'undefined') {
+        Notifier.error(data.msg);
+    } else {
+        Notifier.error(data.msg, data.title);
+    }
+}
+
+function send_error(msg, title) {
+    msghub.publish('error', {'msg': msg, 'title': title}, false);
+}
+
+function recv_notify(channel, data) {
+    Notifier.notify(data.msg, data.title, data.icon_url, data.timeout);
+
+
+var msghub = new MsgHub('https://pubsub.msghub.io');
+msghub.subscribe('success', recv_success);
+msghub.subscribe('info', recv_info);
+msghub.subscribe('warning', recv_warning);
+msghub.subscribe('error', recv_error);
+msghub.subscribe('notify', recv_notify);
+
+
 (function($){
 
   var config = window.NotifierjsConfig = {
