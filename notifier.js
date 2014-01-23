@@ -1,3 +1,5 @@
+var MSGHUB_PUBSUB_URL = 'https://pubsub.msghub.io';
+
 function recv_success(channel, data) {
     if (typeof data.title == 'undefined') {
         Notifier.success(data.msg);
@@ -50,7 +52,7 @@ function recv_notify(channel, data) {
     Notifier.notify(data.msg, data.title, data.icon_url, data.timeout);
 
 
-var msghub = new MsgHub('https://pubsub.msghub.io');
+var msghub = new MsgHub(MSGHUB_PUBSUB_URL);
 msghub.subscribe('success', recv_success);
 msghub.subscribe('info', recv_info);
 msghub.subscribe('warning', recv_warning);
