@@ -9,7 +9,7 @@ function recv_success(channel, data) {
 }
 
 function send_success(msg, title) {
-    msghub.publish('success', {'msg': msg}, false);
+    msghub.publish('success', {'msg': msg, 'title': title}, false);
 }
 
 function recv_info(channel, data) {
@@ -50,6 +50,10 @@ function send_error(msg, title) {
 
 function recv_notify(channel, data) {
     Notifier.notify(data.msg, data.title, data.icon_url, data.timeout);
+
+function send_notify(msg, title, icon_url, timeout) {
+    msghub.publish('notify', {'msg': msg, 'title': title, 'icon_url': icon_url, 'timeout': timeout}, false);
+}
 
 
 var msghub = new MsgHub(MSGHUB_PUBSUB_URL);
