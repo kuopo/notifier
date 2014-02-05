@@ -50,10 +50,12 @@ function send_error(msg, title) {
 
 function recv_notify(channel, data) {
     Notifier.notify(data.msg, data.title, data.icon_url, data.timeout);
+}
 
 function send_notify(msg, title, icon_url, timeout) {
     msghub.publish('notify', {'msg': msg, 'title': title, 'icon_url': icon_url, 'timeout': timeout}, false);
 }
+
 
 
 var msghub = new MsgHub(MSGHUB_PUBSUB_URL);
@@ -62,7 +64,6 @@ msghub.subscribe('info', recv_info);
 msghub.subscribe('warning', recv_warning);
 msghub.subscribe('error', recv_error);
 msghub.subscribe('notify', recv_notify);
-
 
 (function($){
 
